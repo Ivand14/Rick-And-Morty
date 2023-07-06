@@ -1,0 +1,32 @@
+.contenedor {
+    background-image: url('../public/img/fondoRyM.png');
+    background-repeat: none;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    max-height:310vh; /* Cambiar vw por vh */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.contenedorLogin{
+    background-image: url('../public/img/portal.jpg');
+    background-repeat: none;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    max-height:310vh; /* Cambiar vw por vh */
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.disabled{
+  display:none
+}
+
+.enabled{
+  display:flex
+}

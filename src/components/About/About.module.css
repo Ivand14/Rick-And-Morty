@@ -1,0 +1,13 @@
+.Titulo{
+    font-family: cursive;
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 0 0 10px black;
+}
+
+.subTitulo{
+    font-family: cursive;
+    font-size: 3.5rem;
+    text-align: center;
+    text-shadow: 0 0 10px black;
+}
