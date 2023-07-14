@@ -1,5 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER_CARDS } from '../actions/action';
-
+import { ADD_FAV, FILTER, ORDER_CARDS, REMOVE_FAV } from '../actions/action';
 
 const initialState={
     myFavorites:[],
@@ -8,19 +7,10 @@ const initialState={
 
 export const rootReducer = (state=initialState,action)=>{
     switch (action.type) {
-        case ADD_FAV:
-            return {
-                ...state,
-                myFavorites:[...state.myFavorites,action.payload],
-                allCharacters:[...state.allCharacters,action.payload]
-                
-            }
-        case REMOVE_FAV:
-            return{
-                ...state,
-                myFavorites: state.myFavorites.filter(fav=> fav.id !== action.payload),
-                allCharacters:state.allCharacters.filter(fav=> fav.id !== action.payload)
-            }
+        case 'ADD_FAV':
+            return { ...state, myFavorites: action.payload, allCharacters: action.payload };
+        case 'REMOVE_FAV':
+            return { ...state, myFavorites: action.payload,allCharacters:action.payload};
         case FILTER:
             // eslint-disable-next-line eqeqeq
             if(action.payload==='All'){
