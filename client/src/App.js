@@ -17,42 +17,47 @@ function App() {
    const [characters, setCharacters] = useState([]);
    const dispatch=useDispatch()
 
-   const onSearch = (id) => {
-      fetch(`http://localhost:3001/rickandmorty/character/${id}`)
-         .then((response) => {
+   const onSearch = async (id) => {
+
+         try {
+            const response = await fetch(`http://localhost:3001/rickandmorty/character/${id}`);
+            
             if (!response.ok) {
-               throw new Error("¡No hay Personajes con ese id!");
+            throw new Error("¡No hay Personajes con ese id!");
             }
-            return response.json();
-         })
-         .then((data) => {
+            
+            const data = await response.json();
+            
             if (data.name) {
-               const exist = characters.find(
-                  (personaje) => personaje.id === data.id
-               );
-               console.log(data);
-               if (exist) {
-                  window.alert("¡El personaje ya está en la lista!");
-               } else {
-                  setCharacters((oldCharacters) => [...oldCharacters, data]);
-               }
+            const exist = characters.find((personaje) => personaje.id === data.id);
+            
+            console.log(data);
+            
+            if (exist) {
+               window.alert("¡El personaje ya está en la lista!");
             } else {
-               window.alert("¡No hay Personajes con ese id!");
+               setCharacters((oldCharacters) => [...oldCharacters, data]);
             }
-         })
-         .catch((error) => {
+            } else {
+            window.alert("¡No hay Personajes con ese id!");
+            }
+         } catch (error) {
             window.alert(error.message);
-         });
+         }
+      
    };
    
 
    const onClose = (id) => {
-      const newId = parseInt(id);
+      // const newId = parseInt(id);
       setCharacters((personajes) =>
-         personajes.filter((personaje) => personaje.id !== newId)
+         personajes.filter((personaje) => personaje.id !== id)
       );
       dispatch(removeFav(id))
+      console.log('hola')
    };
+
+
 
    const location = useLocation();
 
@@ -60,14 +65,20 @@ function App() {
 
    const navigate = useNavigate();
 
-   const Login=(userData)=> {
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
+   const Login= async (userData)=> {
+
+      try{
+         const { email, password } = userData;
+         const URL = 'http://localhost:3001/rickandmorty/login/';
+         const response = await axios(URL + `?email=${email}&password=${password}`)
+         const {data} = response 
+         const {access} = data
          setAccess(data);
          access && navigate('/home');
-      });
+
+      }catch(error){
+         window.alert(error.message)
+      }
    }
 
    useEffect(()=>{

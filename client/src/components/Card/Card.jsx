@@ -1,15 +1,15 @@
-import style from './Card.module.css'
+import { addFav, removeFav } from '../../redux/actions/action';
+import {useDispatch, useSelector} from 'react-redux'
+import { useEffect, useState } from 'react';
+
 import {Link} from 'react-router-dom'
-import { addFav,removeFav} from '../../redux/actions/action';
-import {useDispatch,useSelector} from 'react-redux'
-import { useEffect,useState } from 'react';
+import style from './Card.module.css'
 
 export default function Card(props) {
 
    const myFavorites=useSelector(state=>state.myFavorites)
    const dispatch=useDispatch()
    const [isFav,setIsFav]=useState(false)
-
    
    
    const handleFavorite=()=>{
@@ -26,12 +26,10 @@ export default function Card(props) {
       setIsFav(myFavorites.some((fav) => fav.id === props.id))
    },[myFavorites,props.id])
 
-   console.log(myFavorites)
-
    return (
       <div key={props.id} className={style.contenedor}>
          <div className={style.textContainer}>
-            <button onClick={()=>props.onClose(props.id)} className={style.boton}>X</button>
+            <button onClick={() => props.onClose(props.id)} className={style.boton}>X</button>
             <Link to={`/detail/${props.id}`}>
                <button className={style.button}>{props.name}</button>
             </Link>
