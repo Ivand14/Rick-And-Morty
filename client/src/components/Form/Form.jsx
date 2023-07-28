@@ -2,8 +2,6 @@ import style from './Form.module.css'
 import { useState } from 'react'
 import { validation } from './validation'
 
-
-
 function Form({Login}) {
 
     const[userData,setUserData]=useState({
@@ -38,8 +36,10 @@ function Form({Login}) {
 
     return (
         <div className={style.contenedor}>
-
-
+                <div className={style.contenedorTitle}>
+                    <h2 className={style.title}>BIENVENIDO A LA APP DE RICK AND MORTY</h2>
+                    <h3 className={style.title}>INICIAR SESION</h3>
+                </div>
             <form className={style.form} onSubmit={handleSubmit}>
                 <div className={style.contenedorInput}>
                     <label className={style.label}>Email:</label>

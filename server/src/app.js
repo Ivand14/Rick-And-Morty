@@ -1,6 +1,12 @@
 const express=require('express')
 const server=express()
-const {router}=require('./routes/index')
+const Register=require('./routes/Register');
+const Character=require('./routes/Character')
+const Delete = require('./routes/Delete')
+const Fav = require('./routes/Fav')
+const login = require('./routes/login')
+const postUser = require('./routes/postUser')
+const morgan = require('morgan');
 
 
 
@@ -19,6 +25,12 @@ server.use((req, res, next) => {
 });
     
     server.use(express.json())
-    server.use('/rickandmorty',router)
+    server.use(morgan('dev'))
+    server.use('/rickandmorty',Register)
+    server.use('/rickandmorty',Character)
+    server.use('/rickandmorty',Delete)
+    server.use('/rickandmorty',Fav)
+    server.use('/rickandmorty',login)
+    server.use('/rickandmorty',postUser)
 
 module.exports = server

@@ -1,21 +1,14 @@
 .contenedor{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top:  1rem;
-
 }
 
-.contenedorInput{
+.contenedorForm{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
-}
-
-.form{
+    margin:  auto;
     background-color:rgba(48, 46, 46, 0.774);
     justify-content: center;
     align-items: center;
@@ -23,10 +16,24 @@
     border-radius: 1rem;
     border:1px green solid;
     box-shadow: 0 0 10px wheat;
+    gap: 1rem;
 }
+
+.text{
+    color: wheat;
+    font-family: cursive;
+}
+
+
+.textError{
+    color: red;
+    font-family: cursive;
+}
+
 
 .label{
     color: aliceblue;
+    font-family: cursive;
 }
 
 .input{
@@ -52,6 +59,10 @@
 
 .button:hover{
     background-color: black;
+}
+
+.link{
+    color: blue;
 }
 
 .title{

@@ -9,6 +9,7 @@ import Detail from "./components/Detail/Detail";
 import Favorites from './components/Favorites/Favorites'
 import Form from "./components/Form/Form";
 import Nav from "./components/Nav/Nav";
+import Register from "./components/Register/Register";
 import axios from "axios";
 import { removeFav } from "./redux/actions/action";
 import {useDispatch} from 'react-redux'
@@ -87,10 +88,11 @@ function App() {
 
 
    return (
-      <div className={location.pathname === "/" ? "contenedorLogin" : "contenedor"}>
-         {location.pathname !== '/' && <Nav onHandleSearch={onSearch}/>  }
+      <div className={location.pathname === "/" || location.pathname === "/login"   ? "contenedorLogin" : "contenedor"}>
+         {location.pathname !== '/' && location.pathname !== "/login"  && <Nav onHandleSearch={onSearch}/>  }
          <Routes>
-         <Route path="/" element={<Form Login={Login}  />} />
+         <Route path="/" element={<Register/>} />
+         <Route path="/login" element={<Form Login={Login}  />} />
          <Route
             path="/home"
             element={<Cards characters={characters} onClose={onClose} />}

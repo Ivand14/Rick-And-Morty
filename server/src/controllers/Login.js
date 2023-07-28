@@ -1,21 +1,18 @@
-const users=require('../utils/users')
+const {User} = require('../DB_connection')
 
-const Login=(req,res)=>{
-    const{email,password}=req.query
-    const findUser=users.find(user=>user.email === email && user.password === password)
 
-    if(findUser){
+const Login = async(req,res) =>{ 
+    const {email,password} = req.query
+    try {
+        if(!email || !password) return res.status(400).json({error:'Faltan Datos'})
+        const findUser = await User.findOne({  where: { email } })
+        if(!findUser) return res.status(404).json({error:'Usuario no encontrado'})
+        if(findUser.password !== password) return res.status(404).json({error:'Contraseña incorrecta'})
+        
         return res.status(200).json({access:true})
-    }else{
-        return res.status(200).json({access:false})
-    } 
-    
-    
+    } catch (error) {
+        return res.status(500).json({error:error.message})
+    }
 }
 
-module.exports={
-    Login
-}
-
-// Deberás obtener los datos email y password que recibes mediante Query. Una vez hecho esto, importa tu arreglo de usuarios y verifica si dentro de ese arreglo hay un usuario que coincida tanto su email y su contraseña con los que recibes por Query.
-//En el caso de que haya un usuario que cumpla esa condición, entonces debes devolver una respuesta con status 200, y, en formato JSON, un objeto con una propiedad access: true. Caso contrario devuelve lo mismo pero con la propiedad access: false.
+module.exports = {Login}

@@ -1,9 +1,13 @@
+import {Link} from 'react-router-dom'
 import React from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import style from './Nav.module.css'
-import {Link} from 'react-router-dom'
 
 function Nav({onHandleSearch}) {
+
+  const handleLogout = () =>{
+    window.history.replaceState(null,'','/login')
+  }
 
   return (
       <div className={style.contenedor}>
@@ -19,6 +23,9 @@ function Nav({onHandleSearch}) {
             </Link>
           </div>
           <SearchBar onSearch={onHandleSearch}/>
+          <Link to={'/login'}>
+              <button className={style.button} onClick={handleLogout}>LOG OUT</button>
+          </Link>
     </div>
   )
 }
